@@ -1,12 +1,9 @@
 package com.learn.springmvc.service.impl;
 
-import com.learn.springmvc.dao.impl.UserDao;
-import com.learn.springmvc.exception.UserNotFoundException;
+import com.learn.springmvc.dao.UserDao;
 import com.learn.springmvc.model.User;
-import com.learn.springmvc.model.impl.UserImpl;
 import com.learn.springmvc.service.UserService;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,28 +11,31 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     UserDao userDao;
+
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @SneakyThrows
     @Override
     public User create(String name, String email) {
-        return userDao.save(new UserImpl(name, email));
+        return userDao.save(new User(name, email));
     }
 
     @Override
     public User getById(long id) {
-        return userDao.getById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
+        return userDao.getById(id);
     }
 
     @Override
     public User getByEmail(String email) {
-        return userDao.getByEmail(email).orElseThrow(() -> new UserNotFoundException("User not found"));
+        return userDao.getUserByEmail(email);
     }
 
     @Override
     public List<User> getByName(String name) {
-        return userDao.getByName(name);
+        return userDao.getAllByName(name);
     }
 
     @Override
@@ -43,11 +43,15 @@ public class UserServiceImpl implements UserService {
         User user = getById(id);
         user.setName(name);
         user.setEmail(email);
-        return userDao.update(user).orElseThrow();
+        return userDao.save(user);
     }
 
     @Override
     public boolean deleteById(long id) {
-        return userDao.delete(id);
+        if (!userDao.existsById(id)) {
+            return false;
+        }
+        userDao.deleteById(id);
+        return true;
     }
 }

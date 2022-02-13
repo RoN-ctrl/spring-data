@@ -1,23 +1,51 @@
 package com.learn.springmvc.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import javax.persistence.*;
 import java.util.Date;
 
-public interface Event {
+@Data
+@NoArgsConstructor
+@Entity
+@Table(name = "events")
+public class Event {
 
-    /**
-     * Event id. UNIQUE.
-     *
-     * @return Event Id
-     */
-    long getId();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String title;
+    private Date date;
 
-    void setId(long id);
+    public Event(String title, Date date) {
+        this.title = title;
+        this.date = date;
+    }
 
-    String getTitle();
+    public long getId() {
+        return id;
+    }
 
-    void setTitle(String title);
+    public void setId(long id) {
+        this.id = id;
+    }
 
-    Date getDate();
+    public String getTitle() {
+        return title;
+    }
 
-    void setDate(Date date);
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
 }

@@ -24,7 +24,6 @@ class BookingFacadeImplTest {
     private static final String EVENT_TITLE = "Giselle";
     private static final String EVENT_DATE = "20-02-2021 18:00";
     private static final String USER_NAME = "Jack";
-    private static final String USER_EMAIL = "jack@test.com";
     private static final int PLACE = 17;
     private static final int ZERO = 0;
 
@@ -99,7 +98,7 @@ class BookingFacadeImplTest {
 
     @Test
     void getUserByIdTest() {
-        User user = createTestUser();
+        User user = createTestUser("test@mail.com1");
         User userById = bookingFacade.getUserById(user.getId());
 
         assertNotNull(userById);
@@ -108,7 +107,7 @@ class BookingFacadeImplTest {
 
     @Test
     void getUserByEmailTest() {
-        User user = createTestUser();
+        User user = createTestUser("test@mail.com2");
         User userByEmail = bookingFacade.getUserByEmail(user.getEmail());
 
         assertNotNull(userByEmail);
@@ -117,7 +116,7 @@ class BookingFacadeImplTest {
 
     @Test
     void getUsersByNameTest() {
-        User user = createTestUser();
+        User user = createTestUser("test@mail.com3");
         List<User> usersByName = bookingFacade.getUsersByName(user.getName(), ZERO, ZERO);
 
         assertNotNull(usersByName);
@@ -126,18 +125,18 @@ class BookingFacadeImplTest {
 
     @Test
     void createUserTest() {
-        User user = createTestUser();
+        User user = createTestUser("test@mail.com4");
 
         assertNotNull(user);
         assertAll(
                 () -> assertEquals(USER_NAME, user.getName()),
-                () -> assertEquals(USER_EMAIL, user.getEmail())
+                () -> assertEquals("test@mail.com4", user.getEmail())
         );
     }
 
     @Test
     void updateUserTest() {
-        User user = createTestUser();
+        User user = createTestUser("test@mail.com5");
         String updatedName = "Updated Jack";
         String updatedEmail = "jach@updated.com";
         User updatedUser = bookingFacade.updateUser(user.getId(), updatedName, updatedEmail);
@@ -151,7 +150,7 @@ class BookingFacadeImplTest {
 
     @Test
     void deleteUserTest() {
-        User user = createTestUser();
+        User user = createTestUser("test@mail.com6");
 
         assertTrue(bookingFacade.deleteUser(user.getId()));
         assertFalse(bookingFacade.getUsersByName(user.getName(), ZERO, ZERO).contains(user));
@@ -159,7 +158,7 @@ class BookingFacadeImplTest {
 
     @Test
     void bookTicketTest() {
-        User user = createTestUser();
+        User user = createTestUser("test@mail.com7");
         Event event = createTestEvent();
 
         Ticket ticket = bookingFacade.bookTicket(user.getId(), event.getId(), PLACE, Ticket.Category.STANDARD);
@@ -175,7 +174,7 @@ class BookingFacadeImplTest {
 
     @Test
     void getBookedTicketsByUserTest() {
-        User user = createTestUser();
+        User user = createTestUser("test@mail.com8");
         Event event = createTestEvent();
         Ticket ticket = bookingFacade.bookTicket(user.getId(), event.getId(), PLACE, Ticket.Category.STANDARD);
 
@@ -187,7 +186,7 @@ class BookingFacadeImplTest {
 
     @Test
     void GetBookedTicketsByEventTest() {
-        User user = createTestUser();
+        User user = createTestUser("test@mail.com9");
         Event event = createTestEvent();
         Ticket ticket = bookingFacade.bookTicket(user.getId(), event.getId(), PLACE, Ticket.Category.STANDARD);
 
@@ -199,7 +198,7 @@ class BookingFacadeImplTest {
 
     @Test
     void cancelTicketTest() {
-        User user = createTestUser();
+        User user = createTestUser("test@mail.com0");
         Event event = createTestEvent();
         Ticket ticket = bookingFacade.bookTicket(user.getId(), event.getId(), PLACE, Ticket.Category.STANDARD);
 
@@ -212,7 +211,7 @@ class BookingFacadeImplTest {
         return bookingFacade.createEvent(EVENT_TITLE, DATE_FORMAT.parse(EVENT_DATE));
     }
 
-    private User createTestUser() {
-        return bookingFacade.createUser(USER_NAME, USER_EMAIL);
+    private User createTestUser(String email) {
+        return bookingFacade.createUser(USER_NAME, email);
     }
 }

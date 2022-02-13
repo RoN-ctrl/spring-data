@@ -1,26 +1,51 @@
 package com.learn.springmvc.model;
 
-public interface User {
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    /**
-     * User Id. UNIQUE.
-     *
-     * @return User Id.
-     */
-    long getId();
+import javax.persistence.*;
 
-    void setId(long id);
+@Data
+@NoArgsConstructor
+@Entity
+@Table(name = "users")
+public class User {
 
-    String getName();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String name;
 
-    void setName(String name);
+    @Column(unique = true)
+    private String email;
 
-    /**
-     * User email. UNIQUE.
-     *
-     * @return User email.
-     */
-    String getEmail();
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
 
-    void setEmail(String email);
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }
