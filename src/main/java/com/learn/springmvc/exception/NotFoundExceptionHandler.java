@@ -9,19 +9,19 @@ import org.springframework.web.servlet.ModelAndView;
 @ControllerAdvice
 public class NotFoundExceptionHandler {
 
-  @ExceptionHandler(EventNotFoundException.class)
-  @Loggable
-  public ModelAndView eventNotFoundHandler(EventNotFoundException e) {
-    var modelAndView = ControllerUtils.getModelAndView("errorPage");
-    modelAndView.addObject("errorModel", e.getMessage());
-    return modelAndView;
-  }
+    @ExceptionHandler(EventNotFoundException.class)
+    @Loggable
+    public ModelAndView eventNotFoundHandler(EventNotFoundException e) {
+        var modelAndView = ControllerUtils.getModelAndView("errorPage");
+        modelAndView.addObject("errorModel", e.getMessage());
+        return modelAndView;
+    }
 
-  @ExceptionHandler(UserNotFoundException.class)
-  @Loggable
-  public ModelAndView userNotFoundHandler(UserNotFoundException e) {
-    var modelAndView = ControllerUtils.getModelAndView("errorPage");
-    modelAndView.addObject("errorModel", e.getMessage());
-    return modelAndView;
-  }
+    @ExceptionHandler(UserNotFoundException.class)
+    @Loggable
+    public ModelAndView userNotFoundHandler(UserNotFoundException e) {
+        var modelAndView = ControllerUtils.getModelAndView("errorPage");
+        modelAndView.addObject("errorModel", e.getMessage());
+        return modelAndView;
+    }
 }

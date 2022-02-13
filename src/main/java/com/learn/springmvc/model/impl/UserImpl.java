@@ -20,15 +20,15 @@ public class UserImpl implements User {
     @Column(unique = true)
     private String email;
 
-  public UserImpl(String name, String email) {
-    this.name = name;
-    this.email = email;
-  }
+    public UserImpl(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
 
-  @Override
-  public long getId() {
-    return id;
-  }
+    @Override
+    public long getId() {
+        return id;
+    }
 
     @Override
     public void setId(long id) {
