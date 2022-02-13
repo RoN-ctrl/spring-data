@@ -1,25 +1,23 @@
 package com.learn.springmvc.model;
 
 import java.util.Date;
-import org.springframework.stereotype.Component;
 
-@Component
 public interface Event {
 
-  /**
-   * Event id. UNIQUE.
-   *
-   * @return Event Id
-   */
-  long getId();
+    /**
+     * Event id. UNIQUE.
+     *
+     * @return Event Id
+     */
+    long getId();
 
-  void setId(long id);
+    void setId(long id);
 
-  String getTitle();
+    String getTitle();
 
-  void setTitle(String title);
+    void setTitle(String title);
 
-  Date getDate();
+    Date getDate();
 
-  void setDate(Date date);
+    void setDate(Date date);
 }

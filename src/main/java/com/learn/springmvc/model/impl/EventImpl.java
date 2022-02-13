@@ -3,18 +3,23 @@ package com.learn.springmvc.model.impl;
 import com.learn.springmvc.model.Event;
 import java.util.Date;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Data
+@NoArgsConstructor
+@Entity
+@Table(name = "events")
 public class EventImpl implements Event {
 
-  private static long idCounter = 0;
-
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
   private String title;
   private Date date;
 
   public EventImpl(String title, Date date) {
-    this.id = ++idCounter;
     this.title = title;
     this.date = date;
   }

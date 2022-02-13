@@ -23,25 +23,25 @@ public class EventDao implements Dao<Event> {
 
   private final Map<Long, Event> events = new HashMap<>();
 
-  @Value("${p.events}")
-  String filePath;
+//  @Value("${p.events}")
+//  String filePath;
 
-  @PostConstruct
-  @SneakyThrows
-  public void populateEvents() {
-    List<String> eventsFromFile = Utils.readLines(filePath);
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-    int indexForTitle = "title".length() + 1;
-    int indexForDate = "date".length() + 1;
-
-    for (String event : eventsFromFile) {
-      String[] split = event.split(",");
-      if (split.length == 2) {
-        String date = split[1].substring(indexForDate);
-        save(new EventImpl(split[0].substring(indexForTitle), dateFormat.parse(date)));
-      }
-    }
-  }
+//  @PostConstruct
+//  @SneakyThrows
+//  public void populateEvents() {
+//    List<String> eventsFromFile = Utils.readLines(filePath);
+//    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+//    int indexForTitle = "title".length() + 1;
+//    int indexForDate = "date".length() + 1;
+//
+//    for (String event : eventsFromFile) {
+//      String[] split = event.split(",");
+//      if (split.length == 2) {
+//        String date = split[1].substring(indexForDate);
+//        save(new EventImpl(split[0].substring(indexForTitle), dateFormat.parse(date)));
+//      }
+//    }
+//  }
 
   @Override
   public Event save(Event event) throws IdAlreadyExistsException {

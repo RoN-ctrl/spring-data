@@ -23,26 +23,26 @@ public class TicketDao implements Dao<Ticket> {
 
   private final Map<Long, Ticket> tickets = new HashMap<>();
 
-  @Value("${p.tickets}")
-  String filePath;
+//  @Value("${p.tickets}")
+//  String filePath;
 
-  @PostConstruct
-  @SneakyThrows
-  public void populateUsers() {
-    List<String> usersFromFile = Utils.readLines(filePath);
-
-    for (String user : usersFromFile) {
-      String[] split = user.split(",");
-      if (split.length == 4) {
-        long eventId = Long.parseLong(split[0].substring("event_id".length() + 1));
-        long userId = Long.parseLong(split[1].substring("user_id".length() + 1));
-        Ticket.Category category = Utils.parseCategory(split[2].substring("category".length() + 1));
-        int place = Integer.parseInt(split[3].substring("place".length() + 1));
-
-        save(new TicketImpl(eventId, userId, category, place));
-      }
-    }
-  }
+//  @PostConstruct
+//  @SneakyThrows
+//  public void populateUsers() {
+//    List<String> usersFromFile = Utils.readLines(filePath);
+//
+//    for (String user : usersFromFile) {
+//      String[] split = user.split(",");
+//      if (split.length == 4) {
+//        long eventId = Long.parseLong(split[0].substring("event_id".length() + 1));
+//        long userId = Long.parseLong(split[1].substring("user_id".length() + 1));
+//        Ticket.Category category = Utils.parseCategory(split[2].substring("category".length() + 1));
+//        int place = Integer.parseInt(split[3].substring("place".length() + 1));
+//
+//        save(new TicketImpl(eventId, userId, category, place));
+//      }
+//    }
+//  }
 
   @Override
   public Ticket save(Ticket ticket) throws IdAlreadyExistsException {

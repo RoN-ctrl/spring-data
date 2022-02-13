@@ -21,23 +21,23 @@ public class UserDao implements Dao<User> {
 
   private final Map<Long, User> users = new HashMap<>();
 
-  @Value("${p.users}")
-  String filePath;
+//  @Value("${p.users}")
+//  String filePath;
 
-  @PostConstruct
-  @SneakyThrows
-  public void populateUsers() {
-    List<String> usersFromFile = Utils.readLines(filePath);
-    int indexForName = "name".length() + 1;
-    int indexForEmail = "email".length() + 1;
-
-    for (String user : usersFromFile) {
-      String[] split = user.split(",");
-      if (split.length == 2) {
-        save(new UserImpl(split[0].substring(indexForName), split[1].substring(indexForEmail)));
-      }
-    }
-  }
+//  @PostConstruct
+//  @SneakyThrows
+//  public void populateUsers() {
+//    List<String> usersFromFile = Utils.readLines(filePath);
+//    int indexForName = "name".length() + 1;
+//    int indexForEmail = "email".length() + 1;
+//
+//    for (String user : usersFromFile) {
+//      String[] split = user.split(",");
+//      if (split.length == 2) {
+//        save(new UserImpl(split[0].substring(indexForName), split[1].substring(indexForEmail)));
+//      }
+//    }
+//  }
 
   @Override
   public User save(User user) throws IdAlreadyExistsException {

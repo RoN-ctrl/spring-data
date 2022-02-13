@@ -3,13 +3,19 @@ package com.learn.springmvc.model.impl;
 import com.learn.springmvc.model.Ticket;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "tickets")
 public class TicketImpl implements Ticket {
 
-  private static long idCounter = 0;
-
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
   private long eventId;
   private long userId;
@@ -17,7 +23,6 @@ public class TicketImpl implements Ticket {
   private int place;
 
   public TicketImpl(long eventId, long userId, Category category, int place) {
-    this.id = ++idCounter;
     this.eventId = eventId;
     this.userId = userId;
     this.category = category;

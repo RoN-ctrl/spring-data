@@ -1,35 +1,32 @@
 package com.learn.springmvc.model;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public interface Ticket {
 
-  enum Category {STANDARD, PREMIUM, BAR}
+    /**
+     * Ticket Id. UNIQUE.
+     *
+     * @return Ticket Id.
+     */
+    long getId();
 
-  /**
-   * Ticket Id. UNIQUE.
-   *
-   * @return Ticket Id.
-   */
-  long getId();
+    void setId(long id);
 
-  void setId(long id);
+    long getEventId();
 
-  long getEventId();
+    void setEventId(long eventId);
 
-  void setEventId(long eventId);
+    long getUserId();
 
-  long getUserId();
+    void setUserId(long userId);
 
-  void setUserId(long userId);
+    Category getCategory();
 
-  Category getCategory();
+    void setCategory(Category category);
 
-  void setCategory(Category category);
+    int getPlace();
 
-  int getPlace();
+    void setPlace(int place);
 
-  void setPlace(int place);
+    enum Category {STANDARD, PREMIUM, BAR}
 
 }

@@ -2,18 +2,25 @@ package com.learn.springmvc.model.impl;
 
 import com.learn.springmvc.model.User;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Data
+@NoArgsConstructor
+@Entity
+@Table(name = "users")
 public class UserImpl implements User {
 
-  private static long idCounter = 0;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String name;
 
-  private long id;
-  private String name;
-  private String email;
+    @Column(unique = true)
+    private String email;
 
   public UserImpl(String name, String email) {
-    this.id = ++idCounter;
     this.name = name;
     this.email = email;
   }
@@ -23,37 +30,37 @@ public class UserImpl implements User {
     return id;
   }
 
-  @Override
-  public void setId(long id) {
-    this.id = id;
-  }
+    @Override
+    public void setId(long id) {
+        this.id = id;
+    }
 
-  @Override
-  public String getName() {
-    return name;
-  }
+    @Override
+    public String getName() {
+        return name;
+    }
 
-  @Override
-  public void setName(String name) {
-    this.name = name;
-  }
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  @Override
-  public String getEmail() {
-    return email;
-  }
+    @Override
+    public String getEmail() {
+        return email;
+    }
 
-  @Override
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    @Override
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-  @Override
-  public String toString() {
-    return "User{" +
-        "id=" + id +
-        ", name='" + name + '\'' +
-        ", email='" + email + '\'' +
-        '}';
-  }
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

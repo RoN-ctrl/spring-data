@@ -2,25 +2,25 @@ package com.learn.springmvc.model;
 
 public interface User {
 
-  /**
-   * User Id. UNIQUE.
-   *
-   * @return User Id.
-   */
-  long getId();
+    /**
+     * User Id. UNIQUE.
+     *
+     * @return User Id.
+     */
+    long getId();
 
-  void setId(long id);
+    void setId(long id);
 
-  String getName();
+    String getName();
 
-  void setName(String name);
+    void setName(String name);
 
-  /**
-   * User email. UNIQUE.
-   *
-   * @return User email.
-   */
-  String getEmail();
+    /**
+     * User email. UNIQUE.
+     *
+     * @return User email.
+     */
+    String getEmail();
 
-  void setEmail(String email);
+    void setEmail(String email);
 }
