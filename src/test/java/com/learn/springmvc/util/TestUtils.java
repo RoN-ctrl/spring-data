@@ -14,7 +14,6 @@ public class TestUtils {
     public static final String EVENT_DATE = "20-02-2021 18:00";
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy HH:mm");
     public static final String USER_NAME = "Tommy";
-    public static final String USER_EMAIL = "tommy@mail.com";
 
     @SneakyThrows
     public static Event createTestEvent(BookingFacade bookingFacade) {
@@ -22,8 +21,8 @@ public class TestUtils {
     }
 
     @SneakyThrows
-    public static User createTestUser(BookingFacade bookingFacade) {
-        return bookingFacade.createUser(USER_NAME, USER_EMAIL);
+    public static User createTestUser(BookingFacade bookingFacade, String email) {
+        return bookingFacade.createUser(USER_NAME, email);
     }
 
     public static <T> String getObjectAsString(final T obj) {

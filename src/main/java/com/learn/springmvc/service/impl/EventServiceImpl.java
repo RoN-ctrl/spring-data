@@ -3,6 +3,7 @@ package com.learn.springmvc.service.impl;
 import com.learn.springmvc.dao.EventDao;
 import com.learn.springmvc.model.Event;
 import com.learn.springmvc.service.EventService;
+import com.learn.springmvc.util.Utils;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +37,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> getByDay(Date day) {
-        return eventDao.getAllByDate(day);
+        Date formattedDate = Utils.getFormattedDate(day);
+        return eventDao.getAllByDate(formattedDate);
     }
 
     @Override

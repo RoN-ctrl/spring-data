@@ -24,7 +24,7 @@ class UserControllerTest {
 
     @Test
     void getUserByIdTest() throws Exception {
-        User user = TestUtils.createTestUser(bookingFacade);
+        User user = TestUtils.createTestUser(bookingFacade, "test@mail.com17");
         mvc.perform(get("/users/getById/{id}", user.getId()))
                 .andExpect(status().isOk())
                 .andExpect(view().name("userPage"))
@@ -34,7 +34,7 @@ class UserControllerTest {
 
     @Test
     void getUserByEmailTest() throws Exception {
-        User user = TestUtils.createTestUser(bookingFacade);
+        User user = TestUtils.createTestUser(bookingFacade, "test@mail.com15");
         mvc.perform(get("/users/getByEmail/{email}", user.getEmail()))
                 .andExpect(status().isOk())
                 .andExpect(view().name("userPage"))
@@ -44,7 +44,7 @@ class UserControllerTest {
 
     @Test
     void getUserByNameTest() throws Exception {
-        User user = TestUtils.createTestUser(bookingFacade);
+        User user = TestUtils.createTestUser(bookingFacade, "test@mail.com14");
         mvc.perform(get("/users/getByName/{name}", user.getName()))
                 .andExpect(status().isOk())
                 .andExpect(view().name("userPage"))
@@ -60,14 +60,14 @@ class UserControllerTest {
 
     @Test
     void updateUserTest() throws Exception {
-        User user = TestUtils.createTestUser(bookingFacade);
+        User user = TestUtils.createTestUser(bookingFacade, "test@mail.com11");
         mvc.perform(post("/users/update/" + user.getId() + "?name=Bill&email=bill@mail.com"))
                 .andExpect(status().isOk());
     }
 
     @Test
     void deleteUserTest() throws Exception {
-        User user = TestUtils.createTestUser(bookingFacade);
+        User user = TestUtils.createTestUser(bookingFacade, "test@mail.com12");
         mvc.perform(delete("/users/delete/{id}", user.getId()))
                 .andExpect(status().isOk());
     }

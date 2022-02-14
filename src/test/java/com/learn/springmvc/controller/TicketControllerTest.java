@@ -34,7 +34,7 @@ class TicketControllerTest {
 
     @Test
     void getTicketsByUserTest() throws Exception {
-        User user = TestUtils.createTestUser(bookingFacade);
+        User user = TestUtils.createTestUser(bookingFacade, "test@mail.com22");
         bookingFacade.bookTicket(user.getId(), 1, 19, Category.STANDARD);
 
         mvc.perform(get("/tickets/getByUser")

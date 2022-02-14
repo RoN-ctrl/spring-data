@@ -22,7 +22,7 @@ class BookingFacadeImplTest {
     private static BookingFacade bookingFacade;
 
     private static final String EVENT_TITLE = "Giselle";
-    private static final String EVENT_DATE = "20-02-2021 18:00";
+    private static final String EVENT_DATE = "20-02-2021 00:00";
     private static final String USER_NAME = "Jack";
     private static final int PLACE = 17;
     private static final int ZERO = 0;
