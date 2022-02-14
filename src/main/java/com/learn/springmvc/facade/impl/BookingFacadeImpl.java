@@ -1,16 +1,20 @@
 package com.learn.springmvc.facade.impl;
 
 import com.learn.springmvc.aspect.Loggable;
+import com.learn.springmvc.exception.InsufficientFundsException;
 import com.learn.springmvc.facade.BookingFacade;
 import com.learn.springmvc.model.Event;
 import com.learn.springmvc.model.Ticket;
 import com.learn.springmvc.model.User;
+import com.learn.springmvc.model.UserAccount;
 import com.learn.springmvc.service.EventService;
 import com.learn.springmvc.service.TicketService;
+import com.learn.springmvc.service.UserAccountService;
 import com.learn.springmvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -20,12 +24,14 @@ public class BookingFacadeImpl implements BookingFacade {
     private final UserService userService;
     private final TicketService ticketService;
     private final EventService eventService;
+    private final UserAccountService userAccountService;
 
-    @Autowired
-    public BookingFacadeImpl(UserService userService, TicketService ticketService, EventService eventService) {
+    public BookingFacadeImpl(UserService userService, TicketService ticketService, EventService eventService,
+                             UserAccountService userAccountService) {
         this.userService = userService;
         this.ticketService = ticketService;
         this.eventService = eventService;
+        this.userAccountService = userAccountService;
     }
 
     @Override
@@ -103,6 +109,10 @@ public class BookingFacadeImpl implements BookingFacade {
     @Override
     @Loggable
     public Ticket bookTicket(long userId, long eventId, int place, Ticket.Category category) {
+        UserAccount userAccount = userAccountService.getByUserId(userId);
+        BigDecimal price = eventService.getById(eventId).getPrice();
+
+        userAccountService.payFor(userAccount.getId(), price);
         return ticketService.create(userId, eventId, category, place);
     }
 
@@ -122,5 +132,11 @@ public class BookingFacadeImpl implements BookingFacade {
     @Loggable
     public boolean cancelTicket(long ticketId) {
         return ticketService.delete(ticketId);
+    }
+
+    @Override
+    @Loggable
+    public UserAccount refillAmountOn(long id, BigDecimal amount) {
+        return userAccountService.refillAmountOn(id, amount);
     }
 }

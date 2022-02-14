@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class EventServiceImpl implements EventService {
 
-    EventDao eventDao;
+    private final EventDao eventDao;
 
     public EventServiceImpl(EventDao eventDao) {
         this.eventDao = eventDao;

@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class TicketServiceImpl implements TicketService {
 
-    TicketDao ticketDao;
+    private final TicketDao ticketDao;
 
     public TicketServiceImpl(TicketDao ticketDao) {
         this.ticketDao = ticketDao;

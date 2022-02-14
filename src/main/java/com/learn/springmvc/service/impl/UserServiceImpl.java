@@ -3,7 +3,6 @@ package com.learn.springmvc.service.impl;
 import com.learn.springmvc.dao.UserDao;
 import com.learn.springmvc.model.User;
 import com.learn.springmvc.service.UserService;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,13 +10,12 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    UserDao userDao;
+    private final UserDao userDao;
 
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }
 
-    @SneakyThrows
     @Override
     public User create(String name, String email) {
         return userDao.save(new User(name, email));

@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -18,6 +19,7 @@ public class Event {
     private long id;
     private String title;
     private Date date;
+    private BigDecimal price;
 
     public Event(String title, Date date) {
         this.title = title;

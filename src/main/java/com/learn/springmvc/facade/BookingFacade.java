@@ -3,7 +3,9 @@ package com.learn.springmvc.facade;
 import com.learn.springmvc.model.Event;
 import com.learn.springmvc.model.Ticket;
 import com.learn.springmvc.model.User;
+import com.learn.springmvc.model.UserAccount;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -158,5 +160,13 @@ public interface BookingFacade {
      * @return Flag whether anything has been canceled.
      */
     boolean cancelTicket(long ticketId);
+
+    /**
+     * Refill amount to a UserAccount with a specified id.
+     *
+     * @param amount value to be added to current amount.
+     * @return UserAccount with new amount.
+     */
+    UserAccount refillAmountOn(long id, BigDecimal amount);
 
 }

@@ -13,7 +13,8 @@ CREATE TABLE `events`
 (
     `id`    bigint NOT NULL AUTO_INCREMENT,
     `date`  datetime(6) DEFAULT NULL,
-    `title` varchar(255) DEFAULT NULL,
+    `price` decimal(19, 2) DEFAULT NULL,
+    `title` varchar(255)   DEFAULT NULL,
     PRIMARY KEY (`id`)
 );
 
@@ -25,5 +26,14 @@ CREATE TABLE `tickets`
     `event_id` bigint NOT NULL,
     `place`    int    NOT NULL,
     `user_id`  bigint NOT NULL,
+    PRIMARY KEY (`id`)
+);
+
+DROP TABLE IF EXISTS `user_accounts`;
+CREATE TABLE `user_accounts`
+(
+    `id`      bigint NOT NULL AUTO_INCREMENT,
+    `user_id` bigint NOT NULL,
+    `amount`  decimal(19, 2) DEFAULT NULL,
     PRIMARY KEY (`id`)
 );
