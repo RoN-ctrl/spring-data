@@ -1,7 +1,6 @@
 package com.learn.springmvc.facade.impl;
 
 import com.learn.springmvc.aspect.Loggable;
-import com.learn.springmvc.exception.InsufficientFundsException;
 import com.learn.springmvc.facade.BookingFacade;
 import com.learn.springmvc.model.Event;
 import com.learn.springmvc.model.Ticket;
@@ -11,10 +10,8 @@ import com.learn.springmvc.service.EventService;
 import com.learn.springmvc.service.TicketService;
 import com.learn.springmvc.service.UserAccountService;
 import com.learn.springmvc.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -112,7 +109,7 @@ public class BookingFacadeImpl implements BookingFacade {
         UserAccount userAccount = userAccountService.getByUserId(userId);
         double price = eventService.getById(eventId).getPrice();
 
-        userAccountService.payFor(userAccount.getId(), price);
+        userAccountService.withdrawAmount(userAccount.getId(), price);
         return ticketService.create(userId, eventId, category, place);
     }
 
@@ -136,13 +133,33 @@ public class BookingFacadeImpl implements BookingFacade {
 
     @Override
     @Loggable
-    public UserAccount refillAmountOn(long id, double amount) {
-        return userAccountService.refillAmountOn(id, amount);
+    public UserAccount createUserAccount(long userId, double amount) {
+        return userAccountService.create(userId, amount);
+    }
+
+    @Override
+    public UserAccount getUserAccountById(long id) {
+        return userAccountService.getById(id);
+    }
+
+    @Override
+    public UserAccount getUserAccountByUserId(long userId) {
+        return userAccountService.getByUserId(userId);
     }
 
     @Override
     @Loggable
-    public UserAccount createUserAccount(long userId, double amount) {
-        return userAccountService.create(userId, amount);
+    public UserAccount refillAmount(long id, double amount) {
+        return userAccountService.refillAmount(id, amount);
+    }
+
+    @Override
+    public UserAccount withdrawAmount(long id, double amount) {
+        return userAccountService.withdrawAmount(id, amount);
+    }
+
+    @Override
+    public boolean deleteUserAccountById(long id) {
+        return userAccountService.deleteById(id);
     }
 }

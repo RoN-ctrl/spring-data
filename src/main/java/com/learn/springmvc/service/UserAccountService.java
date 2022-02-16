@@ -12,9 +12,9 @@ public interface UserAccountService {
 
     UserAccount getByUserId(long userId);
 
-    UserAccount refillAmountOn(long id, double amount);
+    UserAccount refillAmount(long id, double amount);
 
-    UserAccount payFor(long id, double amount);
+    UserAccount withdrawAmount(long id, double amount);
 
     boolean deleteById(long id);
 }

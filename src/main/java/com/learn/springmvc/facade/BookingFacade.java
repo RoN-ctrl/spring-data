@@ -5,7 +5,6 @@ import com.learn.springmvc.model.Ticket;
 import com.learn.springmvc.model.User;
 import com.learn.springmvc.model.UserAccount;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -47,7 +46,7 @@ public interface BookingFacade {
      *
      * @param title Event title.
      * @param date  Event date.
-     * @param price  Event price.
+     * @param price Event price.
      * @return Created Event object.
      */
     Event createEvent(String title, Date date, double price);
@@ -163,20 +162,54 @@ public interface BookingFacade {
     boolean cancelTicket(long ticketId);
 
     /**
-     * Refill amount to a UserAccount with a specified id.
-     *
-     * @param amount value to be added to current amount.
-     * @return UserAccount with new amount.
-     */
-    UserAccount refillAmountOn(long id, double amount);
-
-    /**
      * Create UserAccount for a User.
      *
      * @param userId user id.
      * @param amount value to be added to current amount.
-     * @return UserAccount with new amount.
+     * @return created UserAccount object.
      */
     UserAccount createUserAccount(long userId, double amount);
+
+    /**
+     * Get UserAccount with a specified id.
+     *
+     * @param id userAccount id.
+     * @return UserAccount.
+     */
+    UserAccount getUserAccountById(long id);
+
+    /**
+     * Get UserAccount with a specified userId.
+     *
+     * @param userId user id.
+     * @return UserAccount.
+     */
+    UserAccount getUserAccountByUserId(long userId);
+
+    /**
+     * Refill funds to a UserAccount with a specified id.
+     *
+     * @param id     userAccount id.
+     * @param amount value to be added to current amount.
+     * @return UserAccount with new amount.
+     */
+    UserAccount refillAmount(long id, double amount);
+
+    /**
+     * Withdraw funds from a UserAccount with a specified id.
+     *
+     * @param id     userAccount id.
+     * @param amount value to be taken away from current amount.
+     * @return UserAccount with new amount.
+     */
+    UserAccount withdrawAmount(long id, double amount);
+
+    /**
+     * Delete UserAccount with a specified id.
+     *
+     * @param id userAccount id.
+     * @return Flag that shows whether userAccount has been deleted.
+     */
+    boolean deleteUserAccountById(long id);
 
 }

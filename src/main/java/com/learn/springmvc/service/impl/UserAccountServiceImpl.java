@@ -33,14 +33,14 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
-    public UserAccount refillAmountOn(long id, double amount) {
+    public UserAccount refillAmount(long id, double amount) {
         UserAccount userAccount = getById(id);
         userAccount.setAmount(userAccount.getAmount() + (amount));
         return userAccountDao.save(userAccount);
     }
 
     @Override
-    public UserAccount payFor(long id, double amount) {
+    public UserAccount withdrawAmount(long id, double amount) {
         UserAccount userAccount = getById(id);
         if (userAccount.getAmount() - amount < 0) {
             throw new InsufficientFundsException("Insufficient Funds");
