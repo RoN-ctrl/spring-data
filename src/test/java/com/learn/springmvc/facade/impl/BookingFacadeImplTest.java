@@ -30,6 +30,8 @@ class BookingFacadeImplTest {
     private static final int PLACE = 17;
     private static final int ZERO = 0;
     private static final double PRICE = 15;
+    public static final int USER_ID = 359;
+    public static final int AMOUNT = 90;
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
@@ -210,6 +212,67 @@ class BookingFacadeImplTest {
         assertFalse(bookingFacade.getBookedTickets(user, ZERO, ZERO).contains(ticket));
     }
 
+    @Test
+    void createUserAccountTest() {
+        UserAccount userAccount = createTestUserAccount();
+
+        assertNotNull(userAccount);
+        assertAll(
+                () -> assertEquals(USER_ID, userAccount.getUserId()),
+                () -> assertEquals(AMOUNT, userAccount.getAmount())
+        );
+    }
+
+    @Test
+    void getUserAccountByIdTest() {
+        UserAccount userAccount = createTestUserAccount();
+        UserAccount userAccountById = bookingFacade.getUserAccountById(userAccount.getId());
+
+        assertNotNull(userAccountById);
+        assertEquals(userAccount, userAccountById);
+    }
+
+    @Test
+    void getUserAccountByUserIdTest() {
+        long userId = 370;
+        UserAccount userAccount = bookingFacade.createUserAccount(userId, AMOUNT);
+        UserAccount userAccountByUserId = bookingFacade.getUserAccountByUserId(userId);
+
+        assertNotNull(userAccountByUserId);
+        assertEquals(userAccount, userAccountByUserId);
+    }
+
+    @Test
+    void refillAmountTest() {
+        UserAccount userAccount = createTestUserAccount();
+        double initialAmount = userAccount.getAmount();
+        double addedAmount = 20;
+
+        bookingFacade.refillAmount(userAccount.getId(), addedAmount);
+        double currentAmount = bookingFacade.getUserAccountById(userAccount.getId()).getAmount();
+
+        assertEquals(initialAmount + addedAmount, currentAmount);
+    }
+
+    @Test
+    void withdrawAmountTest() {
+        UserAccount userAccount = createTestUserAccount();
+        double initialAmount = userAccount.getAmount();
+        double subtractedAmount = 20;
+
+        bookingFacade.withdrawAmount(userAccount.getId(), subtractedAmount);
+        double currentAmount = bookingFacade.getUserAccountById(userAccount.getId()).getAmount();
+
+        assertEquals(initialAmount - subtractedAmount, currentAmount);
+    }
+
+    @Test
+    void deleteUserAccountByIdTest() {
+        UserAccount userAccount = createTestUserAccount();
+
+        assertTrue(bookingFacade.deleteUserAccountById(userAccount.getId()));
+    }
+
     @SneakyThrows
     private Event createTestEvent() {
         return bookingFacade.createEvent(EVENT_TITLE, DATE_FORMAT.parse(EVENT_DATE), PRICE);
@@ -221,7 +284,9 @@ class BookingFacadeImplTest {
         return user;
     }
 
-    @Test
-    void refillAmountOnTest() {
+    //create test UserAccount object with constant params
+    //userId=359, amount=90
+    private UserAccount createTestUserAccount() {
+        return bookingFacade.createUserAccount(USER_ID, AMOUNT);
     }
 }
