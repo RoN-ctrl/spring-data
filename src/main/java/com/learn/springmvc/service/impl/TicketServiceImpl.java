@@ -7,6 +7,7 @@ import com.learn.springmvc.model.User;
 import com.learn.springmvc.service.TicketService;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class TicketServiceImpl implements TicketService {
 
     @SneakyThrows
     @Override
+    @Transactional
     public Ticket create(long userId, long eventId, Ticket.Category category, int place) {
         return ticketDao.save(new Ticket(eventId, userId, category, place));
     }
@@ -36,6 +38,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
+    @Transactional
     public boolean delete(long id) {
         if (!ticketDao.existsById(id)) {
             return false;

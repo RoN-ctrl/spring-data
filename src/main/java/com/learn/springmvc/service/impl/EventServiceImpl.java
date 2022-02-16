@@ -6,6 +6,7 @@ import com.learn.springmvc.service.EventService;
 import com.learn.springmvc.util.Utils;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -22,6 +23,7 @@ public class EventServiceImpl implements EventService {
 
     @SneakyThrows
     @Override
+    @Transactional
     public Event create(String title, Date date, double price) {
         return eventDao.save(new Event(title, date, price));
     }
@@ -43,6 +45,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    @Transactional
     public Event update(long id, String title, Date date) {
         Event event = getById(id);
         event.setTitle(title);
@@ -51,6 +54,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    @Transactional
     public boolean deleteById(long id) {
         if (!eventDao.existsById(id)) {
             return false;

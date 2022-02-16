@@ -5,8 +5,7 @@ import com.learn.springmvc.exception.InsufficientFundsException;
 import com.learn.springmvc.model.UserAccount;
 import com.learn.springmvc.service.UserAccountService;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserAccountServiceImpl implements UserAccountService {
@@ -18,6 +17,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
+    @Transactional
     public UserAccount create(long userId, double amount) {
         return userAccountDao.save(new UserAccount(userId, amount));
     }
@@ -33,6 +33,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
+    @Transactional
     public UserAccount refillAmount(long id, double amount) {
         UserAccount userAccount = getById(id);
         userAccount.setAmount(userAccount.getAmount() + (amount));
@@ -40,6 +41,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
+    @Transactional(rollbackFor = InsufficientFundsException.class)
     public UserAccount withdrawAmount(long id, double amount) {
         UserAccount userAccount = getById(id);
         if (userAccount.getAmount() - amount < 0) {
@@ -50,6 +52,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
+    @Transactional
     public boolean deleteById(long id) {
         if (!userAccountDao.existsById(id)) {
             return false;

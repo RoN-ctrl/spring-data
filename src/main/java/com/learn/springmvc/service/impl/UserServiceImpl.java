@@ -4,6 +4,7 @@ import com.learn.springmvc.dao.UserDao;
 import com.learn.springmvc.model.User;
 import com.learn.springmvc.service.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User create(String name, String email) {
         return userDao.save(new User(name, email));
     }
@@ -37,6 +39,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User update(long id, String name, String email) {
         User user = getById(id);
         user.setName(name);
@@ -45,6 +48,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public boolean deleteById(long id) {
         if (!userDao.existsById(id)) {
             return false;
