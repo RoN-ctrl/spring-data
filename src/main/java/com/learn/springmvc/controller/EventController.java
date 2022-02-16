@@ -65,10 +65,11 @@ public class EventController {
 
     @PostMapping("/create")
     public ModelAndView createEvent(@RequestParam String title,
-                                    @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") Date date) {
+                                    @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") Date date,
+                                    @RequestParam double price) {
 
         var modelAndView = getModelAndView(EVENT_PAGE);
-        var event = bookingFacade.createEvent(title, date);
+        var event = bookingFacade.createEvent(title, date, price);
         modelAndView.addObject(EVENT_MODEL, "CREATED " + event);
         return modelAndView;
     }

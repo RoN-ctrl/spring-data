@@ -48,8 +48,9 @@ class TicketControllerTest {
 
     @Test
     void getTicketsByEvent() throws Exception {
+        User user = TestUtils.createTestUser(bookingFacade, "test@mail.com28");
         Event event = TestUtils.createTestEvent(bookingFacade);
-        bookingFacade.bookTicket(event.getId(), 1, 19, Category.STANDARD);
+        bookingFacade.bookTicket(user.getId(), event.getId(), 19, Category.STANDARD);
 
         mvc.perform(get("/tickets/getByEvent")
                 .content(TestUtils.getObjectAsString(event))

@@ -13,7 +13,7 @@ CREATE TABLE `events`
 (
     `id`    bigint NOT NULL AUTO_INCREMENT,
     `date`  datetime(6) DEFAULT NULL,
-    `price` decimal(19, 2) DEFAULT NULL,
+    `price` double NOT NULL,
     `title` varchar(255)   DEFAULT NULL,
     PRIMARY KEY (`id`)
 );

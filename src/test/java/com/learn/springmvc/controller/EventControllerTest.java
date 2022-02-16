@@ -58,7 +58,7 @@ class EventControllerTest {
 
     @Test
     void createEventTest() throws Exception {
-        mvc.perform(post("/events/create?title=testEvent&date=20-02-2021"))
+        mvc.perform(post("/events/create?title=testEvent&date=20-02-2021&price=15"))
                 .andExpect(status().isOk());
     }
 

@@ -7,6 +7,7 @@ import com.learn.springmvc.util.Utils;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -21,8 +22,8 @@ public class EventServiceImpl implements EventService {
 
     @SneakyThrows
     @Override
-    public Event create(String title, Date date) {
-        return eventDao.save(new Event(title, date));
+    public Event create(String title, Date date, double price) {
+        return eventDao.save(new Event(title, date, price));
     }
 
     @Override

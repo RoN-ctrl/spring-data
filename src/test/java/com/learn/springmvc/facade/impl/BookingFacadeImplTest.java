@@ -5,12 +5,15 @@ import com.learn.springmvc.facade.BookingFacade;
 import com.learn.springmvc.model.Event;
 import com.learn.springmvc.model.Ticket;
 import com.learn.springmvc.model.User;
+import com.learn.springmvc.model.UserAccount;
+import com.learn.springmvc.service.UserAccountService;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -26,6 +29,7 @@ class BookingFacadeImplTest {
     private static final String USER_NAME = "Jack";
     private static final int PLACE = 17;
     private static final int ZERO = 0;
+    private static final double PRICE = 15;
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
@@ -208,10 +212,16 @@ class BookingFacadeImplTest {
 
     @SneakyThrows
     private Event createTestEvent() {
-        return bookingFacade.createEvent(EVENT_TITLE, DATE_FORMAT.parse(EVENT_DATE));
+        return bookingFacade.createEvent(EVENT_TITLE, DATE_FORMAT.parse(EVENT_DATE), PRICE);
     }
 
     private User createTestUser(String email) {
-        return bookingFacade.createUser(USER_NAME, email);
+        User user = bookingFacade.createUser(USER_NAME, email);
+        bookingFacade.createUserAccount(user.getId(), 150);
+        return user;
+    }
+
+    @Test
+    void refillAmountOnTest() {
     }
 }

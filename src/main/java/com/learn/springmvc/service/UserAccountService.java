@@ -6,15 +6,15 @@ import java.math.BigDecimal;
 
 public interface UserAccountService {
 
-    UserAccount create(long userId, BigDecimal amount);
+    UserAccount create(long userId, double amount);
 
     UserAccount getById(long id);
 
     UserAccount getByUserId(long userId);
 
-    UserAccount refillAmountOn(long id, BigDecimal amount);
+    UserAccount refillAmountOn(long id, double amount);
 
-    UserAccount payFor(long id, BigDecimal amount);
+    UserAccount payFor(long id, double amount);
 
     boolean deleteById(long id);
 }

@@ -54,8 +54,8 @@ public class BookingFacadeImpl implements BookingFacade {
 
     @Override
     @Loggable
-    public Event createEvent(String title, Date date) {
-        return eventService.create(title, date);
+    public Event createEvent(String title, Date date, double price) {
+        return eventService.create(title, date, price);
     }
 
     @Override
@@ -110,7 +110,7 @@ public class BookingFacadeImpl implements BookingFacade {
     @Loggable
     public Ticket bookTicket(long userId, long eventId, int place, Ticket.Category category) {
         UserAccount userAccount = userAccountService.getByUserId(userId);
-        BigDecimal price = eventService.getById(eventId).getPrice();
+        double price = eventService.getById(eventId).getPrice();
 
         userAccountService.payFor(userAccount.getId(), price);
         return ticketService.create(userId, eventId, category, place);
@@ -136,7 +136,13 @@ public class BookingFacadeImpl implements BookingFacade {
 
     @Override
     @Loggable
-    public UserAccount refillAmountOn(long id, BigDecimal amount) {
+    public UserAccount refillAmountOn(long id, double amount) {
         return userAccountService.refillAmountOn(id, amount);
+    }
+
+    @Override
+    @Loggable
+    public UserAccount createUserAccount(long userId, double amount) {
+        return userAccountService.create(userId, amount);
     }
 }

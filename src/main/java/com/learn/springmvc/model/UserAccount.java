@@ -17,9 +17,9 @@ public class UserAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private long userId;
-    private BigDecimal amount;
+    private double amount;
 
-    public UserAccount(long userId, BigDecimal amount) {
+    public UserAccount(long userId, double amount) {
         this.userId = userId;
         this.amount = amount;
     }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface EventService {
 
-    Event create(String title, Date date);
+    Event create(String title, Date date, double price);
 
     Event getById(long id);
 

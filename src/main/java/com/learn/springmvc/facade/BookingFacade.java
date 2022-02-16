@@ -47,9 +47,10 @@ public interface BookingFacade {
      *
      * @param title Event title.
      * @param date  Event date.
+     * @param price  Event price.
      * @return Created Event object.
      */
-    Event createEvent(String title, Date date);
+    Event createEvent(String title, Date date, double price);
 
     /**
      * Updates event using given data.
@@ -167,6 +168,15 @@ public interface BookingFacade {
      * @param amount value to be added to current amount.
      * @return UserAccount with new amount.
      */
-    UserAccount refillAmountOn(long id, BigDecimal amount);
+    UserAccount refillAmountOn(long id, double amount);
+
+    /**
+     * Create UserAccount for a User.
+     *
+     * @param userId user id.
+     * @param amount value to be added to current amount.
+     * @return UserAccount with new amount.
+     */
+    UserAccount createUserAccount(long userId, double amount);
 
 }

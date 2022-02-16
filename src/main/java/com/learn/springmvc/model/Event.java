@@ -2,10 +2,8 @@ package com.learn.springmvc.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -19,11 +17,12 @@ public class Event {
     private long id;
     private String title;
     private Date date;
-    private BigDecimal price;
+    private double price;
 
-    public Event(String title, Date date) {
+    public Event(String title, Date date, double price) {
         this.title = title;
         this.date = date;
+        this.price = price;
     }
 
     public long getId() {
