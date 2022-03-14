@@ -2,8 +2,6 @@ package com.learn.springmvc.service;
 
 import com.learn.springmvc.model.UserAccount;
 
-import java.math.BigDecimal;
-
 public interface UserAccountService {
 
     UserAccount create(long userId, double amount);

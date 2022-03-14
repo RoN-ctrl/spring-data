@@ -30,11 +30,7 @@ public class UserController {
 
         var modelAndView = getModelAndView(USER_PAGE);
         var user = bookingFacade.getUserById(id);
-        if (Objects.nonNull(user)) {
-            modelAndView.addObject(USER_MODEL, user);
-        } else {
-            modelAndView.addObject(USER_MODEL, "User not found : id=" + id);
-        }
+        modelAndView.addObject(USER_MODEL, Objects.requireNonNullElseGet(user, () -> "User not found : id=" + id));
 
         return modelAndView;
     }
@@ -44,11 +40,8 @@ public class UserController {
 
         var modelAndView = getModelAndView(USER_PAGE);
         var user = bookingFacade.getUserByEmail(email);
-        if (Objects.nonNull(user)) {
-            modelAndView.addObject(USER_MODEL, user);
-        } else {
-            modelAndView.addObject(USER_MODEL, "User not found : email=" + email);
-        }
+        modelAndView.addObject(USER_MODEL,
+                Objects.requireNonNullElseGet(user, () -> "User not found : email=" + email));
 
         return modelAndView;
     }

@@ -32,11 +32,7 @@ public class EventController {
 
         var modelAndView = getModelAndView(EVENT_PAGE);
         var event = bookingFacade.getEventById(id);
-        if (Objects.nonNull(event)) {
-            modelAndView.addObject(EVENT_MODEL, event);
-        } else {
-            modelAndView.addObject(EVENT_MODEL, "Event not found : id=" + id);
-        }
+        modelAndView.addObject(EVENT_MODEL, Objects.requireNonNullElseGet(event, () -> "Event not found : id=" + id));
 
         return modelAndView;
     }
